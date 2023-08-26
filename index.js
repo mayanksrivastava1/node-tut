@@ -1,31 +1,16 @@
 const express = require('express')
-const path = require('path')
+const reqFilter = require('./middleware')
+const app= express()
 
-const app = express()
-const publicPath = path.join(__dirname,'public')
-
-// app.use(express.static(publicPath))
-
-app.set('view engine','ejs');
-
-app.get('',(req,res)=>{
-    res.sendFile(`${publicPath}/Home.html`)
+app.get('/',reqFilter,(req,res)=>{
+    res.send('Welcome to Home Page')
 })
 
-// Template engine
-app.get('/profile',(req,res)=>{
-    const user={
-        name:'mayank',
-        room:'003',
-        skills:['php','js', 'c++']
-    }
-    res.render('profile',{user})
+app.get('/users',(req,res)=>{
+    res.send('Welcome to users Page')
 })
 
-//
-app.get('*',(req,res)=>{
-    res.sendFile(`${publicPath}/Erroe404.html`)
+app.get('/about',(req,res)=>{
+    res.send('Welcome to about Page')
 })
-
 app.listen(5000)
-
